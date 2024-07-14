@@ -28,6 +28,11 @@ server.on('connection', (socket) => {
             queue.get(rcvid)?.push(text);
         }
     })
+    socket.on('message', (params: string) => {
+        const data = JSON.parse(params).message;
+        const message = data.message;
+        const roomid = data.roomid;
+    })
     socket.on('close', () => {
         clients.forEach((ws, id) => {
             if (clients.get(id) === ws)
