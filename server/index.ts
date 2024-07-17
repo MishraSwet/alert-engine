@@ -1,3 +1,5 @@
+import express from 'express';
+import http from 'http';
 import { WebSocket, WebSocketServer } from "ws";
 
 interface room{
@@ -8,7 +10,10 @@ const clients: Map<string, WebSocket> = new Map<string, WebSocket>;
 const queue: Map<string, string[]> = new Map<string, string[]>;
 const rooms: Map<string, room> = new Map<string, room>;
 
-const server = new WebSocketServer({ port: 8080 })
+const app = express();
+const httpserver = http.createServer(app)
+
+const server = new WebSocketServer({ server:httpserver });
 
 server.on('connection', (socket) => {
     socket.on('identify', (clientdata: string) => {
@@ -68,4 +73,8 @@ server.on('connection', (socket) => {
                 clients.delete(id)
         })
     })
+})
+
+httpserver.listen(8080, () => {
+    console.log("Web-Socket Server Running On Port 8080")
 })
