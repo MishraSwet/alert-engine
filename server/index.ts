@@ -1,7 +1,5 @@
 import { WebSocket, WebSocketServer } from "ws";
-import { express } from "express"
-const app = express();
-app.listen(3000,()=>console.log(server running))
+
 interface room{
     user1: WebSocket,
     user2: WebSocket
