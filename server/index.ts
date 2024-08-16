@@ -41,7 +41,7 @@ server.on('connection', (socket) => {
             rooms.set(roomid,newroom)
         }
     })
-    socket.on('alert', (message: string) => {
+    socket.on('alert ', (message: string) => {
         const data = JSON.parse(message);
         const text:string = data.text;
         const rcvid:string = data.rcvid;
