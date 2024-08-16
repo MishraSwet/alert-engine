@@ -15,7 +15,7 @@ const httpserver = http.createServer(app)
 
 const server = new WebSocketServer({ server:httpserver });
 
-server.on('connection', (socket) => {
+server.on('connection', (socket ) => {
     socket.on('identify', (clientdata: string) => {
         const data = JSON.parse(clientdata);
         const id = data.id;
